@@ -7,8 +7,19 @@ function Get-UserID {
                 -Properties enabled -Server ...1... -searchbase "...2..." 
 }
 
+function Break-Loop {
+    $finish = Read-Host -Prompt "Continue searching? [y/n]"
+
+    if($finish -match '[yes]') {
+        continue
+    } else {
+        break
+    }
+}
+
 
 #Infinite loop to continue search
 while($True) {
     Get-UserID | Format-Table Givenname, Surname, Name -AutoSize
+    Break-Loop
 }

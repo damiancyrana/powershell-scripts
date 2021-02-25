@@ -5,6 +5,13 @@ function Get-UserID {
 
     $userID = Get-ADUser -Filter {(Description -like $name) -or (EmailAddress -like $name)}`
                 -Properties enabled -Server ...1... -searchbase "...2..." 
+
+    #Error handling
+    if($userID) {
+        return $userID
+    } else {
+        Write-Output "UserID NOT FOUND!!! Check the correctness of the entered data"
+    }
 }
 
 function Break-Loop {
